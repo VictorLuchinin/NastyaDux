@@ -48,4 +48,30 @@ ANastyaDuxCharacter::ANastyaDuxCharacter()
 void ANastyaDuxCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+
+	MovementTick(DeltaSeconds);
+}
+
+void ANastyaDuxCharacter::SetupPlayerInputComponent(UInputComponent* InputComponent)
+{
+	Super::SetupPlayerInputComponent(InputComponent);
+
+	InputComponent->BindAxis(TEXT("MoveForward"), this, &ANastyaDuxCharacter::InputAxisX);
+	InputComponent->BindAxis(TEXT("MoveRight"), this, &ANastyaDuxCharacter::InputAxisY);
+}
+
+void ANastyaDuxCharacter::InputAxisY(float value)
+{
+	AxisY = value;
+}
+
+void ANastyaDuxCharacter::InputAxisX(float value)
+{
+	AxisX = value;
+}
+
+void ANastyaDuxCharacter::MovementTick(float DeltaTime)
+{
+	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), AxisX);
+	AddMovementInput(FVector(0.0f, 1.0f, 0.0f), AxisY);
 }

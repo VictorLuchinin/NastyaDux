@@ -17,10 +17,23 @@ public:
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 
+	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	UFUNCTION()
+	void InputAxisY(float value);
+	UFUNCTION()
+	void InputAxisX(float value);
+
+	float AxisX = 0.0f;
+	float AxisY = 0.0f;
+
+	UFUNCTION()
+	void MovementTick(float DeltaTime);
 
 private:
 	/** Top down camera */
